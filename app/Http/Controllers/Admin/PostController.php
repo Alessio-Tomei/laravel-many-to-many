@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Post;
 use App\Category;
 use App\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,7 +18,9 @@ class PostController extends Controller
         'published' => 'required|integer|min:0|max:1',
         'category_id' => 'nullable|exists:categories,id',
         'tags' => 'nullable|exists:tags,id',
+        'image' => 'nullable|image|mimes:jpg,bmp,png,jpeg',
     ];
+
 
     // protected function slug($title = "", $id = ""){
     //     $tmp = Str::slug($title);
@@ -78,6 +81,11 @@ class PostController extends Controller
         }
 
         $data['slug'] = $tempSlug;
+
+        if(isset($data['image'])){
+            $imgPath = Storage::put('uploads', $data['image']);
+            $data['image'] = $imgPath;
+        }
      
         $newPost = Post::create($data);
 
@@ -137,6 +145,11 @@ class PostController extends Controller
         }
 
         $data['slug'] = $tempSlug;
+
+        if(isset($data['image'])){
+            $imgPath = Storage::put('uploads', $data['image']);
+            $data['image'] = $imgPath;
+        }
 
         $post->update($data);
 

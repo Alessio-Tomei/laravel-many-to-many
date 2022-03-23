@@ -5,7 +5,7 @@
 @section('content')
     <h1>Crea post</h1>  
 
-    <form action="{{route("admin.posts.store")}}" method="POST">
+    <form action="{{route("admin.posts.store")}}" method="POST" enctype="multipart/form-data">
         
         @csrf
 
@@ -48,6 +48,10 @@
                     <label class="form-check-label" for="{{$tag->slug}}">{{$tag->name}}</label>
                 </div>
             @endforeach
+        </div>
+        <div class="form-group mt-4">
+            <label for="image">Inserisci un immagine:</label>
+            <input type="file" name="image" class="form-control-file" id="image">
         </div>    
         <a href="{{route("admin.posts.index")}}"><button type="button" class="btn btn-primary">back</button></a>
         <button type="submit" class="btn btn-success">add</button>

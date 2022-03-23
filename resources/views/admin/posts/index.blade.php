@@ -15,6 +15,7 @@
         <th scope="col">slug</th>
         <th scope="col">category</th>
         <th scope="col">Tags</th>
+        <th scope="col">Image</th>
         <th scope="col"><a href="{{route("admin.posts.create")}}"><button type="button" class="btn btn-success">create</button></a></th>
         <th scope="col"><a href="{{route("admin.home")}}"><button type="button" class="btn btn-info">back</button></a></th>
     </tr>
@@ -35,6 +36,13 @@
                     @endforeach
                 @else 
                     -   
+                @endif
+            </td>
+            <td> 
+                @if ($post->image != null)
+                    <img class="img-thumbnail" src="{{ asset('storage/' . $post->image) }}" alt="">
+                @else 
+                    empty
                 @endif
             </td>
             <td><a href="{{route("admin.posts.show", $post->id)}}"><button type="button" class="btn btn-primary">show</button></a></td>

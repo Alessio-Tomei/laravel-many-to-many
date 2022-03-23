@@ -3,6 +3,13 @@
 @section('title','post {{$post->id}}')
 
 @section('content')
+    @if ($post->image != null)
+        <div>
+            <img src="{{ asset('storage/' . $post->image) }}" alt="">
+        </div>
+    @else
+        <p><span class="ms_bold">Image:</span> empty</p>
+    @endif
     <p><span class="ms_bold">ID:</span> {{$post->id}}</p>
     <h3><span class="ms_bold">Title:</span> {{$post->title}}</h3>
     <p><span class="ms_bold">Content:</span> {{$post->content}}</p>

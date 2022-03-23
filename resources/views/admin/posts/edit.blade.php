@@ -5,7 +5,7 @@
 @section('content')
     <h1>Edita post: {{$post->title}}</h1>  
     
-    <form action="{{route("admin.posts.update", $post->id)}}" method="POST">
+    <form action="{{route("admin.posts.update", $post->id)}}" method="POST" enctype="multipart/form-data">
         
         @csrf
         @method('PUT')
@@ -50,6 +50,19 @@
                     <label class="form-check-label" for="{{$tag->slug}}">{{$tag->name}}</label>
                 </div>
             @endforeach
+        </div>
+        @if ($post->image != null)
+            <div>
+                <img src="{{ asset('storage/' . $post->image) }}" alt="">
+            </div>
+        @else
+            <div>
+                <p>Nessuna immagine</p>
+            </div>
+        @endif
+        <div class="form-group">
+            <label for="image">Scegli un file:</label>
+            <input type="file" name="image" class="form-control-file" id="image">
         </div> 
         <a href="{{route("admin.posts.index")}}"><button type="button" class="btn btn-primary">back</button></a>
         <button type="submit" class="btn btn-success">save</button>
